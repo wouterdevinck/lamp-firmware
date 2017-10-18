@@ -1,0 +1,3 @@
+[submodule "components/core/lamp-core"]
+	path = components/core/lamp-core
+	url = https://github.com/wouterdevinck/lamp-core
