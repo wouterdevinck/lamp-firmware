@@ -5,6 +5,10 @@
 
 #include "sdkconfig.h"
 
+#include "HttpServer.h"
+#include "RgbLed.h"
+#include "Lamp.h"
+
 static char tag[] = "my tag";
 extern "C" {
 	void app_main(void);
@@ -14,6 +18,7 @@ class MyWiFiEventHandler: public WiFiEventHandler {
 
 	esp_err_t staGotIp(system_event_sta_got_ip_t event_sta_got_ip) {
 		ESP_LOGD(tag, "MyWiFiEventHandler(Class): staGotIp");
+		// Do something
 		return ESP_OK;
 	}
 };
