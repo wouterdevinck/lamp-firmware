@@ -32,8 +32,8 @@ void app_main(void)
 	wifi.setIPInfo("192.168.1.99", "192.168.1.1", "255.255.255.0");
 	wifi.connectAP("myssid", "mypassword");
 
-  auto http = new HttpServer();
-  auto led = new RgbLed();
-  auto lamp = new Lamp(http, led);
-  lamp->start(80);
+  //auto http = new HttpServer();
+  //auto led = new RgbLed();
+  //auto lamp = new Lamp(http, led);
+  //lamp->start(80);
 }
