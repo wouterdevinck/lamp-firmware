@@ -1,21 +1,3 @@
-#include "HttpServer.h"
-#include "RgbLed.h"
-#include "Lamp.h"
-
-extern "C" {
-  void app_main(void);
-}
-
-using namespace lamp;
-
-void app_main(void) {
-  auto http = new HttpServer();
-  auto led = new RgbLed();
-  auto lamp = new Lamp(http, led);
-  lamp->start(80);
-}
-
-/*
 #include <esp_log.h>
 #include <string>
 #include <WiFi.h>
@@ -32,7 +14,6 @@ class MyWiFiEventHandler: public WiFiEventHandler {
 
 	esp_err_t staGotIp(system_event_sta_got_ip_t event_sta_got_ip) {
 		ESP_LOGD(tag, "MyWiFiEventHandler(Class): staGotIp");
-		// Do something
 		return ESP_OK;
 	}
 };
@@ -45,5 +26,9 @@ void app_main(void)
 	wifi.setWifiEventHandler(eventHandler);
 	wifi.setIPInfo("192.168.1.99", "192.168.1.1", "255.255.255.0");
 	wifi.connectAP("myssid", "mypassword");
+
+  auto http = new HttpServer();
+  auto led = new RgbLed();
+  auto lamp = new Lamp(http, led);
+  lamp->start(80);
 }
-*/
