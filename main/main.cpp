@@ -1,39 +1,42 @@
-#include <esp_log.h>
-#include <string>
-#include <WiFi.h>
-#include <WiFiEventHandler.h>
+#include "esp_log.h"
 
-#include "sdkconfig.h"
+#include "WiFi.h"
+#include "WiFiEventHandler.h"
 
 #include "HttpServer.h"
 #include "RgbLed.h"
 #include "Lamp.h"
 
-static char tag[] = "my tag";
+#define WIFI_SSID CONFIG_WIFI_SSID
+#define WIFI_PASS CONFIG_WIFI_PASSWORD
+
+static char tag[] = "LampMain";
+
+using namespace lamp;
+
 extern "C" {
-	void app_main(void);
+  void app_main(void);
 }
 
-class MyWiFiEventHandler: public WiFiEventHandler {
+class LampWiFiEventHandler: public WiFiEventHandler {
 
-	esp_err_t staGotIp(system_event_sta_got_ip_t event_sta_got_ip) {
-		ESP_LOGD(tag, "MyWiFiEventHandler(Class): staGotIp");
-		// Do something
-		return ESP_OK;
-	}
+  esp_err_t staGotIp(system_event_sta_got_ip_t event_sta_got_ip) {
+    ESP_LOGD(tag, "LampWiFiEventHandler: Got IP address");
+    return ESP_OK;
+  }
+
 };
 
-void app_main(void)
-{
-	WiFi wifi;
-	MyWiFiEventHandler *eventHandler = new MyWiFiEventHandler();
+void app_main(void) {
 
-	wifi.setWifiEventHandler(eventHandler);
-	wifi.setIPInfo("192.168.1.99", "192.168.1.1", "255.255.255.0");
-	wifi.connectAP("myssid", "mypassword");
+  WiFi wifi;
+  auto *eventHandler = new LampWiFiEventHandler();
+  wifi.setWifiEventHandler(eventHandler);
+  wifi.connectAP(WIFI_SSID, WIFI_PASS);
 
-  //auto http = new HttpServer();
-  //auto led = new RgbLed();
-  //auto lamp = new Lamp(http, led);
-  //lamp->start(80);
+  auto http = new HttpServer();
+  auto led = new RgbLed();
+  auto lamp = new Lamp(http, led);
+  lamp->start(80);
+  
 }
