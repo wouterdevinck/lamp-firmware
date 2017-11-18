@@ -1,3 +1,4 @@
-[submodule "components/core/lamp-core"]
-	path = components/core/lamp-core
-	url = https://github.com/wouterdevinck/lamp-core
+[submodule "components/lamp-core/lamp-core"]
+	path = components/lamp-core/lamp-core
+	url = https://github.com/wouterdevinck/lamp-core.git
+	branch = master
