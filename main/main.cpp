@@ -22,6 +22,12 @@ class LampWiFiEventHandler: public WiFiEventHandler {
 
   esp_err_t staGotIp(system_event_sta_got_ip_t event_sta_got_ip) {
     ESP_LOGD(tag, "LampWiFiEventHandler: Got IP address");
+
+    auto http = new HttpServer();
+    auto led = new RgbLed();
+    auto lamp = new Lamp(http, led);
+    lamp->start(80);
+
     return ESP_OK;
   }
 
@@ -34,9 +40,4 @@ void app_main(void) {
   wifi.setWifiEventHandler(eventHandler);
   wifi.connectAP(WIFI_SSID, WIFI_PASS);
 
-  auto http = new HttpServer();
-  auto led = new RgbLed();
-  auto lamp = new Lamp(http, led);
-  lamp->start(80);
-  
 }
