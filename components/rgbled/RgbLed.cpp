@@ -23,7 +23,7 @@ RgbLed::RgbLed() {
   };
   ledc_timer_config_t ledc_timer = {
     .speed_mode = LEDC_MODE,
-    .bit_num = LEDC_TIMER_13_BIT,
+    .duty_resolution = LEDC_TIMER_13_BIT,
     .timer_num = LEDC_TIMER,
     .freq_hz = 5000
   };
