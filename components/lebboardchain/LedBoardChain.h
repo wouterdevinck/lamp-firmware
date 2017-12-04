@@ -9,7 +9,7 @@ namespace lamp {
     public:
       explicit LedBoardChain();
 
-      void void addKeyframe(milliseconds duration, vector<LedValue> keyframe) override;
+      void addKeyframe(milliseconds duration, vector<LedValue> keyframe) override;
 
   };
 
