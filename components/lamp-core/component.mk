@@ -1,2 +1,2 @@
-COMPONENT_ADD_INCLUDEDIRS := lamp-core
-COMPONENT_SRCDIRS := lamp-core
+COMPONENT_ADD_INCLUDEDIRS := lamp-core/src
+COMPONENT_SRCDIRS := lamp-core/src
