@@ -25,7 +25,7 @@ class LampWiFiEventHandler: public WiFiEventHandler {
 
     auto http = new HttpServer();
     auto led = new RgbLed();
-    auto lamp = new Lamp(http, led);
+    auto lamp = new Lamp(http, led, NULL); // TODO
     lamp->start(80);
 
     return ESP_OK;
