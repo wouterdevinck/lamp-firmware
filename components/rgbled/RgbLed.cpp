@@ -21,12 +21,11 @@ RgbLed::RgbLed() {
       .timer_idx = LEDC_TIMER
     }
   };
-  ledc_timer_config_t ledc_timer = {
-    .speed_mode = LEDC_MODE,
-    .duty_resolution = LEDC_TIMER_13_BIT,
-    .timer_num = LEDC_TIMER,
-    .freq_hz = 5000
-  };
+  ledc_timer_config_t ledc_timer;
+  ledc_timer.speed_mode = LEDC_MODE;
+  ledc_timer.duty_resolution = LEDC_TIMER_13_BIT;
+  ledc_timer.timer_num = LEDC_TIMER;
+  ledc_timer.freq_hz = 5000;
   ledc_timer_config(&ledc_timer);
   for (int ch = 0; ch < LEDC_CH_NUM; ch++) {
     ledc_channel_config_t ledc_channel = {

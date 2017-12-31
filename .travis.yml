@@ -12,8 +12,8 @@ addons:
 
 before_install:
   - PROJECT_PATH=$(pwd)
-  - ESPIDF_VERSION=master # TODO lock to v3.0 once released
-  - TOOLCHAIN_VERSION=1.22.0-73-ge28a011
+  - ESPIDF_VERSION=v3.0-rc1
+  - TOOLCHAIN_VERSION=1.22.0-75-gbaf03c2
 
 install:
   - mkdir -p ~/esp
