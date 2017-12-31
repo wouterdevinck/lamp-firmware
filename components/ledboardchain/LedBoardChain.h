@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ILedBoardChain.h"
+#include "SPI.h"
 
 namespace lamp {
 
