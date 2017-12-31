@@ -5,6 +5,7 @@
 
 #include "HttpServer.h"
 #include "RgbLed.h"
+#include "LedBoardChain.h"
 #include "Lamp.h"
 
 #define WIFI_SSID CONFIG_WIFI_SSID
@@ -25,7 +26,8 @@ class LampWiFiEventHandler: public WiFiEventHandler {
 
     auto http = new HttpServer();
     auto led = new RgbLed();
-    auto lamp = new Lamp(http, led);
+    auto leds = new LedBoardChain();
+    auto lamp = new Lamp(http, led, leds); 
     lamp->start(80);
 
     return ESP_OK;
