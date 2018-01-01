@@ -1,7 +1,6 @@
 // Inspired by: https://github.com/nkolban/esp32-snippets/tree/master/cpp_utils/WiFi.h
 
-#ifndef MAIN_WIFI_H_
-#define MAIN_WIFI_H_
+#pragma once
 
 #include <esp_err.h>
 #include "FreeRTOS.h"
@@ -16,12 +15,10 @@ class WiFi {
 
   private:
     static esp_err_t eventHandler(void* ctx, system_event_t* event);
-	void init();
+    void init();
     WiFiEventHandler* m_pWifiEventHandler;
     bool m_eventLoopStarted;
     bool m_initCalled;
   	FreeRTOS::Semaphore m_connectFinished = FreeRTOS::Semaphore("ConnectFinished");
 
 };
-
-#endif

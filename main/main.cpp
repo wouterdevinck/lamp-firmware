@@ -27,8 +27,8 @@ class LampWiFiEventHandler: public WiFiEventHandler {
     ESP_LOGD(tag, "LampWiFiEventHandler: Got IP address");
 
     auto http = new HttpServer();
-    auto led = new RgbLed(PIN_RGB_LED_RED, PIN_RGB_LED_GREEN, PIN_RGB_LED_BLUE);
-    auto leds = new LedBoardChain();
+    auto led = new RgbLed(PIN_RGB_RED, PIN_RGB_GREEN, PIN_RGB_BLUE);
+    auto leds = new LedBoardChain(SPI_HOST_LED, PIN_LED_MOSI, PIN_LED_MISO, PIN_LED_CLK, PIN_LED_CS, PIN_LED_INT);
     auto lamp = new Lamp(http, led, leds); 
     lamp->start(HTTP_PORT);
 
