@@ -5,11 +5,8 @@
 
 #define LEDC_TIMER          LEDC_TIMER_0
 #define LEDC_MODE           LEDC_HIGH_SPEED_MODE
-#define LEDC_CH0_GPIO       (18)
 #define LEDC_CH0_CHANNEL    LEDC_CHANNEL_0
-#define LEDC_CH1_GPIO       (19)
 #define LEDC_CH1_CHANNEL    LEDC_CHANNEL_1
-#define LEDC_CH2_GPIO       (21)
 #define LEDC_CH2_CHANNEL    LEDC_CHANNEL_2
 #define LEDC_CH_NUM         (3)
 
@@ -25,7 +22,7 @@ namespace lamp {
   class RgbLed : public IRgbLed {
 
     public:
-      explicit RgbLed();
+      explicit RgbLed(int pinRed, int pinGreen, int pinBlue);
 
       void setLedColor(RgbLedColor color) override;
 

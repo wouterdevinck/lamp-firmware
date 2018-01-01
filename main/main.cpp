@@ -1,3 +1,5 @@
+#include "constants.h"
+
 #include "esp_log.h"
 
 #include "WiFi.h"
@@ -25,10 +27,10 @@ class LampWiFiEventHandler: public WiFiEventHandler {
     ESP_LOGD(tag, "LampWiFiEventHandler: Got IP address");
 
     auto http = new HttpServer();
-    auto led = new RgbLed();
+    auto led = new RgbLed(PIN_RGB_LED_RED, PIN_RGB_LED_GREEN, PIN_RGB_LED_BLUE);
     auto leds = new LedBoardChain();
     auto lamp = new Lamp(http, led, leds); 
-    lamp->start(80);
+    lamp->start(HTTP_PORT);
 
     return ESP_OK;
   }
