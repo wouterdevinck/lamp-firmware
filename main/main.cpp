@@ -4,7 +4,7 @@
 
 #include "WiFi.h"
 #include "WiFiEventHandler.h"
-
+#include "SPI.h"
 #include "HttpServer.h"
 #include "RgbLed.h"
 #include "LedBoardChain.h"
@@ -26,9 +26,11 @@ class LampWiFiEventHandler: public WiFiEventHandler {
   esp_err_t staGotIp(system_event_sta_got_ip_t event_sta_got_ip) {
     ESP_LOGD(tag, "LampWiFiEventHandler: Got IP address");
 
+    auto spi = new SPI(SPI1_HOST, SPI1_DMA_CH, SPI1_MOSI_PIN, SPI1_MISO_PIN, SPI1_CLK_PIN, SPI1_CS_PIN);
+
     auto http = new HttpServer();
     auto led = new RgbLed(PIN_RGB_RED, PIN_RGB_GREEN, PIN_RGB_BLUE);
-    auto leds = new LedBoardChain(SPI_HOST_LED, PIN_LED_MOSI, PIN_LED_MISO, PIN_LED_CLK, PIN_LED_CS, PIN_LED_INT);
+    auto leds = new LedBoardChain(spi, PIN_LED_INT);
     auto lamp = new Lamp(http, led, leds); 
     lamp->start(HTTP_PORT);
 

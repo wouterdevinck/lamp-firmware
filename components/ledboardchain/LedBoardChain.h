@@ -3,12 +3,14 @@
 #include "ILedBoardChain.h"
 #include "SPI.h"
 
+#define FRAMERATE (120)
+
 namespace lamp {
 
   class LedBoardChain : public ILedBoardChain {
 
     public:
-      explicit LedBoardChain(spi_host_device_t spiHost, int pinMosi, int pinMiso, int pinClk, int pinCs, int pinInt);
+      explicit LedBoardChain(SPI* spi, int pinInt);
 
       void addKeyframe(milliseconds duration, vector<LedValue> keyframe) override;
 

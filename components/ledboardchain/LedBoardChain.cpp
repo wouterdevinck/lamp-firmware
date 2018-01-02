@@ -2,8 +2,13 @@
 
 using namespace lamp;
 
-LedBoardChain::LedBoardChain(spi_host_device_t spiHost, int pinMosi, int pinMiso, int pinClk, int pinCs, int pinInt) {
-  _spi = new SPI(spiHost, pinMosi, pinMiso, pinClk, pinCs);
+LedBoardChain::LedBoardChain(SPI* spi, int pinInt) {
+  _spi = spi;
+
+  // TODO
+  // addISRHandler
+  // setInterruptType PIO_INTR_NEGEDGE
+  // interruptEnable
 }
 
 void LedBoardChain::addKeyframe(milliseconds duration, vector<LedValue> keyframe) {

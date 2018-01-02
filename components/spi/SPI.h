@@ -8,7 +8,7 @@
 class SPI {
 
   public:
-    SPI(spi_host_device_t host, int pinMosi, int pinMiso, int pinClk, int pinCs);
+    SPI(spi_host_device_t host, int dmaChannel, int pinMosi, int pinMiso, int pinClk, int pinCs);
     virtual ~SPI();
     void transfer(uint8_t *data, size_t dataLen);
     uint8_t transferByte(uint8_t value);

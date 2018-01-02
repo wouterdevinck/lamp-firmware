@@ -5,7 +5,7 @@
 
 static char tag[] = "SPI";
 
-SPI::SPI(spi_host_device_t host, int pinMosi, int pinMiso, int pinClk, int pinCs) {
+SPI::SPI(spi_host_device_t host, int dmaChannel, int pinMosi, int pinMiso, int pinClk, int pinCs) {
   _handle = nullptr;
   _host = host;
   ESP_LOGD(tag, "mosi=%d, miso=%d, clk=%d, cs=%d", pinMosi, pinMiso, pinClk, pinCs);
@@ -17,7 +17,7 @@ SPI::SPI(spi_host_device_t host, int pinMosi, int pinMiso, int pinClk, int pinCs
   bus_config.quadhd_io_num   = -1;
   bus_config.max_transfer_sz = 0;
   ESP_LOGI(tag, "Initializing bus - host=%d", host);
-  esp_err_t errRc = ::spi_bus_initialize(host, &bus_config, 1);
+  esp_err_t errRc = ::spi_bus_initialize(host, &bus_config, dmaChannel);
   if (errRc != ESP_OK) {
   	ESP_LOGE(tag, "spi_bus_initialize(): rc=%d", errRc);
   	abort();
