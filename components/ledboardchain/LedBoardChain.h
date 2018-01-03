@@ -1,5 +1,7 @@
 #pragma once
 
+#include <queue>
+
 #include "ILedBoardChain.h"
 #include "SPI.h"
 
@@ -12,10 +14,13 @@ namespace lamp {
     public:
       explicit LedBoardChain(SPI* spi, int pinInt);
 
-      void addKeyframe(milliseconds duration, vector<LedValue> keyframe) override;
+      void addKeyframe(KeyFrame keyframe) override;
 
     private:
       SPI* _spi;
+      queue<KeyFrame> _frames;
+      bool _ready;
+      void transferNextKeyframe();
 
   };
 
