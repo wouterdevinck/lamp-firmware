@@ -9,6 +9,10 @@
 
 namespace lamp {
 
+  enum Command {
+    SendFrame = 0
+  };
+
   class LedBoardChain : public ILedBoardChain {
 
     public:

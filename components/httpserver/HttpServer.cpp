@@ -22,7 +22,7 @@ void HttpServer::start(int port, IHttpHandler* handler) {
 
 void HttpServer::stop() {
   if(_started && _handle != NULL) {
-    vTaskDelete(_handle);
+    ::vTaskDelete(_handle);
     _started = false;
   }
 }

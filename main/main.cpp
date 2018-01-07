@@ -34,6 +34,31 @@ class LampWiFiEventHandler: public WiFiEventHandler {
     auto lamp = new Lamp(http, led, leds); 
     lamp->start(HTTP_PORT);
 
+    // == TEMP TEST ==
+  
+    LedValue led0;
+    led0.r = 1;
+    led0.g = 1;
+    led0.b = 1;
+    led0.w = 1;
+  
+    LedValue led1;
+    led1.r = 2048;
+    led1.g = 2048;
+    led1.b = 2048;
+    led1.w = 2048;
+  
+    KeyFrame f;
+    f.duration = milliseconds(1000);
+    f.type = AnimationType::Linear;
+    f.frame.reserve(2);
+    f.frame.push_back(led0);
+    f.frame.push_back(led1);
+  
+    leds->addKeyframe(f);
+    
+    // == END ==
+
     return ESP_OK;
   }
 
