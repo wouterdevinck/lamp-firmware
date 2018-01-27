@@ -1,30 +1,15 @@
-sudo: false
+sudo: true
 language: bash
+services:
+  - docker
 os:
   - linux
-
-addons:
-  apt:
-    packages:
-      - gperf
-      - python
-      - python-serial
-
-before_install:
-  - PROJECT_PATH=$(pwd)
-  - ESPIDF_VERSION=v3.0-rc1
-  - TOOLCHAIN_VERSION=1.22.0-75-gbaf03c2
-
-install:
-  - mkdir -p ~/esp
-  - cd ~/esp
-  - wget https://dl.espressif.com/dl/xtensa-esp32-elf-linux64-$TOOLCHAIN_VERSION-5.2.0.tar.gz
-  - tar -xzf xtensa-esp32-elf-linux64-$TOOLCHAIN_VERSION-5.2.0.tar.gz
-  - export PATH=$PATH:$HOME/esp/xtensa-esp32-elf/bin
-  - git clone --recursive -b $ESPIDF_VERSION https://github.com/espressif/esp-idf.git
-  - export IDF_PATH=~/esp/esp-idf
-
-script:
-  - cd $PROJECT_PATH
-  - make defconfig
-  - make
+stages:
+  - Build
+jobs:
+  include:
+    - stage: Build
+      script: 
+        - sudo chmod -R 777 `pwd`
+        - make -f Makefile-docker docker defconfig
+        - make -f Makefile-docker docker all

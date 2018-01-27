@@ -1,0 +1,23 @@
+DOCKER = wouterdevinck/lamp-firmware-build
+
+docker-image:
+	docker build -t $(DOCKER) .
+
+docker-push:
+	docker login
+	docker push $(DOCKER)
+
+docker-clean:
+	docker system prune -f
+
+PWD := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
+
+ifeq (docker,$(firstword $(MAKECMDGOALS)))
+  DOCKER_ARGS := $(wordlist 2,$(words $(MAKECMDGOALS)),$(MAKECMDGOALS))
+  $(eval $(DOCKER_ARGS):;@:)
+endif
+
+docker:
+	docker run --rm -v $(PWD):/src:Z -w /src $(DOCKER) make $(DOCKER_ARGS)
+
+.PHONY: docker-image docker-push docker-clean docker 
