@@ -2,9 +2,9 @@
 
 #define HTTP_PORT     (80)
 
-#define PIN_RGB_BLUE  (18) // TODO: change
-#define PIN_RGB_GREEN (19) // TODO: change
-#define PIN_RGB_RED   (21)
+#define PIN_RGB_BLUE  (33)
+#define PIN_RGB_GREEN (32)
+#define PIN_RGB_RED   (25)
 
 #define PIN_LED_INT   (-1) // TODO
 
